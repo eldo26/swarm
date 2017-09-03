@@ -1,0 +1,12 @@
+---
+- name: Install pip
+  copy: 
+    src: rpms/get-pip.py
+    dest: /root/get-pip.py
+    mode: 755
+- shell: /root/get-pip.py
+    
+- name: pip install docker-py
+  pip:
+    name: docker-py
+    state: present

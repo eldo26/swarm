@@ -1,0 +1,22 @@
+---
+- name: Install pip
+  copy: 
+    src: rpms/get-pip.py
+    dest: /root/get-pip.py
+    mode: 755
+- shell: /root/get-pip.py
+    
+- name: Update docker components
+  pip:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - docker-py
+    - docker
+
+- name: Install docker 
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - docker
+    - docker-compose

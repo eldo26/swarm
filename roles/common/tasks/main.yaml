@@ -1,0 +1,32 @@
+---
+- name: base setup
+  include: centos-6.yml
+  when: ansible_distribution_major_version == '6'
+
+- name: base setup
+  include: centos-7.yml
+  when: ansible_distribution_major_version == '7'
+
+- name: base setup
+  include: ubuntu.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: update docker startup options
+  replace:
+    path: /usr/lib/systemd/system/docker.service
+    regexp: '^ExecStart=/usr/bin/dockerd$'
+    replace: "ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --label DC={{ group_names[0] }}"
+
+- name: start docker service
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+  when: ansible_distribution_major_version == '6'
+
+- name: reload system services 
+  shell: systemctl daemon-reload
+
+- name: start docker service 
+  shell: systemctl restart docker.service
+  when: ansible_distribution_major_version == '7'

@@ -1,0 +1,17 @@
+[workers:children]
+DC-A
+DC-B
+
+
+[management]
+manager-node.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'
+
+[DC-A]
+DC-A-1.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'
+DC-A-2.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'
+DC-A-3.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2202 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'
+
+[DC-B]
+DC-B-1.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2203 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'
+DC-B-2.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2204 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'
+DC-B-3.com ansible_ssh_host=127.0.0.1 ansible_ssh_port=2205 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/josephel/.vagrant.d/boxes/centos-7-docker/0/virtualbox/vagrant_private_key'

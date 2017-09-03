@@ -1,0 +1,14 @@
+---
+- name: load docker image
+  command: docker load -i /data/swarm.tar
+
+- name: swarm advertise
+  docker_container:
+    restart_policy: always
+    name: swarm-client
+    image: swarm
+    command: "join \
+      --advertise={{ ansible_enp0s8.ipv4.address }}:2375 \
+      consul://{{ ansible_enp0s8.ipv4.address }}:8500"
+  tags:
+    - swarm-client

@@ -1,0 +1,4 @@
+---
+- name: download image
+  docker_image:
+    name: nginx

@@ -1,0 +1,20 @@
+---
+- name: load docker image
+  command: docker load -i /data/swarm.tar
+
+- name: start swarm manager
+  docker_container:
+    restart_policy: always
+    name: swarm-manager
+    image: swarm
+    exposed:
+      - 3375/tcp
+      - 2375/tcp
+    ports:
+      - 3375:2375
+    command: "manage \
+      --strategy=spread \
+      --advertise {{ ansible_enp0s8.ipv4.address }}:3375 \
+      consul://{{ ansible_enp0s8.ipv4.address }}:8500"
+  tags:
+    - swarm-manager

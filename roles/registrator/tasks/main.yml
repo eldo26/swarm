@@ -1,0 +1,14 @@
+---
+- name: load docker image
+  command: docker load -i /data/registrator.tar
+
+- name: starting registrator services
+  docker_container:
+    restart_policy: always
+    name: registrator
+    image: gliderlabs/registrator
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    command: consul://{{ ansible_enp0s8.ipv4.address }}:8500
+  tags:
+    - registrator
